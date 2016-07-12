@@ -183,18 +183,31 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTo-YX-sDb">
+                                <rect key="frame" x="223" y="554" width="154" height="30"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="30"/>
+                                <state key="normal" title="Clear">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iXY-lj-IoK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bTo-YX-sDb" firstAttribute="top" secondItem="6h9-5v-ETA" secondAttribute="bottom" constant="8" id="361-VN-HAP"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WZE-95-OxF" secondAttribute="bottom" id="8MO-T6-Vr3"/>
                             <constraint firstAttribute="trailing" secondItem="WZE-95-OxF" secondAttribute="trailing" id="AhB-0r-xIv"/>
                             <constraint firstAttribute="trailing" secondItem="fV9-jQ-XsO" secondAttribute="trailing" id="EUH-i6-HdH"/>
                             <constraint firstItem="WZE-95-OxF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Nuw-fc-IYj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bTo-YX-sDb" secondAttribute="bottom" constant="16" id="Ups-oB-hN8"/>
                             <constraint firstItem="buA-l0-Ycu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="34" id="Xc1-Yp-DcM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fV9-jQ-XsO" secondAttribute="bottom" id="Zve-E3-mTe"/>
                             <constraint firstItem="ToK-iR-a3p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aQn-Rg-52o"/>
                             <constraint firstItem="fV9-jQ-XsO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bnb-4K-VgV"/>
                             <constraint firstItem="6h9-5v-ETA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cIj-40-paT"/>
+                            <constraint firstItem="bTo-YX-sDb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="loO-yV-86R"/>
                             <constraint firstItem="buA-l0-Ycu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m4x-XP-eXI"/>
                             <constraint firstItem="ToK-iR-a3p" firstAttribute="top" secondItem="6h9-5v-ETA" secondAttribute="top" constant="19" id="q7I-a0-q9x"/>
                             <constraint firstItem="WZE-95-OxF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sca-KZ-R78"/>
@@ -203,6 +216,7 @@
                     </view>
                     <connections>
                         <outlet property="calcLabel" destination="ToK-iR-a3p" id="QY9-Le-P5E"/>
+                        <outlet property="clearBut" destination="bTo-YX-sDb" id="Uyr-hG-t1o"/>
                         <outlet property="divBut" destination="Nvq-0z-WeQ" id="Gmx-Hj-ZxH"/>
                         <outlet property="eight" destination="n3O-I7-IOf" id="xti-sH-Sfj"/>
                         <outlet property="eqBut" destination="ksV-DM-Pq0" id="h3p-fY-oOa"/>

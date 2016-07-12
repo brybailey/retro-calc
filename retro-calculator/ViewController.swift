@@ -28,6 +28,10 @@ struct Stack<Element>{
         return stack.isEmpty
     }
     
+    mutating func clear() {
+        stack.removeAll()
+    }
+    
 }
 
 class ViewController: UIViewController {
@@ -46,9 +50,11 @@ class ViewController: UIViewController {
     
     var isOperator: Bool!
     
-    var timeToClear: Bool!
+    var timeToClear: Int!
     
-    var timeToOperate: Int!
+    var timeToOperate: Bool!
+    
+    var justOperated: Bool!
     
     @IBOutlet weak var seven: UIButton!
     @IBOutlet weak var eight: UIButton!
@@ -65,6 +71,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var multBut: UIButton!
     @IBOutlet weak var divBut: UIButton!
     @IBOutlet weak var eqBut: UIButton!
+    @IBOutlet weak var clearBut: UIButton!
     
     @IBOutlet weak var calcLabel: UILabel!
 
@@ -88,9 +95,10 @@ class ViewController: UIViewController {
         }
         
         calcLabel.text = "Press a button!"
-        timeToClear = false
+        timeToClear = 0
         isOperator = false
-        timeToOperate = 0
+        justOperated = false
+        timeToOperate = false
     }
 
    
@@ -150,7 +158,7 @@ class ViewController: UIViewController {
     }
     
     func clearText() {
-        if timeToClear == true {
+        if timeToClear == 1 {
             calcLabel.text = ""
         }
     }
@@ -163,18 +171,37 @@ class ViewController: UIViewController {
         divBut.enabled = enable
         multBut.enabled = enable
     }
-    
-    @IBAction func buttonPressed( whichButton: UIButton) {
-        timeToClear = true
+    func clear () {
+        calcStack.clear()
+        opStack.clear()
+        timeToClear = 1
         clearText()
-        timeToClear = false
+        justOperated = false
+    }
+    @IBAction func clearButtonPressed(sender: AnyObject) {
+        clear()
+    }
+    @IBAction func buttonPressed( whichButton: UIButton) {
+        timeToClear = timeToClear + 1
+        clearText()
+        print( calcStack )
         if isNumBut( whichButton ) {
             if !calcStack.isEmpty() {
-                if !isOperator {
+                if justOperated == true {
+                    /*calcStack.clear()
+                    opStack.clear()
+                    clearText()*/
+                    clear()
+                calcStack.push( numArray[ numButs.indexOf( whichButton )! ] )
+                    calcLabel.text = String( calcStack.peek() )
+                    //timeToOperate = false
+                    //justOperated = false
+                }
+                else if !isOperator {
                     let addToString = String( numArray[ numButs.indexOf( whichButton )! ] )
-                    // calcLabel.text = calcLabel.text! + addToString
+                    calcLabel.text = calcLabel.text! + addToString
                     calcStack.push( Int( String( calcStack.pop() ) + addToString )! )
-                    calcLabel.text = calcLabel.text! + String( calcStack.peek() )
+                    //calcLabel.text = calcLabel.text! + String( calcStack.peek() )
                 } else {
                     isOperator = false
                     calcStack.push( numArray[ numButs.indexOf( whichButton )! ] )
@@ -189,11 +216,21 @@ class ViewController: UIViewController {
         }
         else {
             if !calcStack.isEmpty() {
-                if whichButton == eqBut || timeToOperate%2 == 0 && timeToOperate != 0 {
+                if whichButton == eqBut {
                     calcStack.push( operate() )
                     calcLabel.text = String( calcStack.peek() )
+                    justOperated = true
+                    timeToOperate = false
+                }
+                else if timeToOperate == true {
+                    calcStack.push( operate() )
+                    opStack.push( whichButton )
+                    calcLabel.text = String( calcStack.peek() ) + opToString( opStack.peek() )
+                    ableOps( false )
+                    isOperator = true
                 } else {
-                    timeToOperate = timeToOperate + 1
+                    justOperated = false
+                    timeToOperate = true
                     isOperator = true
                     opStack.push( whichButton )
                     let nextOp = opToString( opStack.peek () )
