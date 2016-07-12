@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="527" width="600" height="73"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleAspectFit" misplaced="YES" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6h9-5v-ETA">
-                                <rect key="frame" x="149" y="55" width="300" height="490"/>
+                                <rect key="frame" x="149" y="56" width="300" height="490"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="counter" translatesAutoresizingMaskIntoConstraints="NO" id="QPX-gk-jkf">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="61"/>
@@ -180,7 +180,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToK-iR-a3p">
                                 <rect key="frame" x="165" y="74" width="270" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -205,7 +205,7 @@
                         <outlet property="calcLabel" destination="ToK-iR-a3p" id="QY9-Le-P5E"/>
                         <outlet property="divBut" destination="Nvq-0z-WeQ" id="Gmx-Hj-ZxH"/>
                         <outlet property="eight" destination="n3O-I7-IOf" id="xti-sH-Sfj"/>
-                        <outlet property="eqBut" destination="ksV-DM-Pq0" id="dGY-nj-pPK"/>
+                        <outlet property="eqBut" destination="ksV-DM-Pq0" id="h3p-fY-oOa"/>
                         <outlet property="five" destination="qIy-ug-ECr" id="Q16-4T-3rD"/>
                         <outlet property="four" destination="wT1-fg-Psb" id="ksK-t0-z4i"/>
                         <outlet property="multBut" destination="K64-eM-kur" id="29T-UN-TWt"/>

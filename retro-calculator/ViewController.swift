@@ -43,10 +43,12 @@ class ViewController: UIViewController {
     var opButs = [UIButton]()
     
     var numArray = [Int]()
-
-    var timesPressed: Int!
     
     var isOperator: Bool!
+    
+    var timeToClear: Bool!
+    
+    var timeToOperate: Int!
     
     @IBOutlet weak var seven: UIButton!
     @IBOutlet weak var eight: UIButton!
@@ -86,8 +88,9 @@ class ViewController: UIViewController {
         }
         
         calcLabel.text = "Press a button!"
-        timesPressed = 0
+        timeToClear = false
         isOperator = false
+        timeToOperate = 0
     }
 
    
@@ -104,6 +107,30 @@ class ViewController: UIViewController {
         else{ return false }
         
     }
+    
+    func operate( ) -> Int {
+
+        let whichOp = opStack.pop()
+        var result: Int = 0
+        if whichOp == plusBut {
+            result = calcStack.pop() + calcStack.pop()
+        } else if whichOp == subBut {
+            let subSecond = calcStack.pop()
+            result = calcStack.pop() - subSecond
+        } else if whichOp == multBut {
+            result = calcStack.pop() * calcStack.pop()
+        } else if whichOp == divBut {
+            let divSecond = calcStack.pop()
+            if divSecond == 0 {
+                result = 0
+            } else {
+            result = calcStack.pop() / divSecond
+            }
+        }
+        return result
+    }
+    
+    
     
     func opToString( whichOp: UIButton ) -> String {
         if whichOp == plusBut {
@@ -123,19 +150,31 @@ class ViewController: UIViewController {
     }
     
     func clearText() {
-        if timesPressed == 1 {
+        if timeToClear == true {
             calcLabel.text = ""
         }
     }
+    
+    
+    func ableOps( enable: Bool ) {
+        eqBut.enabled = enable
+        plusBut.enabled = enable
+        subBut.enabled = enable
+        divBut.enabled = enable
+        multBut.enabled = enable
+    }
+    
     @IBAction func buttonPressed( whichButton: UIButton) {
-        timesPressed = timesPressed + 1
+        timeToClear = true
         clearText()
+        timeToClear = false
         if isNumBut( whichButton ) {
             if !calcStack.isEmpty() {
                 if !isOperator {
                     let addToString = String( numArray[ numButs.indexOf( whichButton )! ] )
-                    calcLabel.text = calcLabel.text! + addToString
+                    // calcLabel.text = calcLabel.text! + addToString
                     calcStack.push( Int( String( calcStack.pop() ) + addToString )! )
+                    calcLabel.text = calcLabel.text! + String( calcStack.peek() )
                 } else {
                     isOperator = false
                     calcStack.push( numArray[ numButs.indexOf( whichButton )! ] )
@@ -146,12 +185,22 @@ class ViewController: UIViewController {
                 calcStack.push( numArray[ numButs.indexOf( whichButton )! ] )
                 calcLabel.text = String( calcStack.peek() )
             }
+            ableOps( true )
         }
         else {
             if !calcStack.isEmpty() {
-                isOperator = true
-                opStack.push( whichButton )
-                calcLabel.text = calcLabel.text! + opToString( whichButton )
+                if whichButton == eqBut || timeToOperate%2 == 0 && timeToOperate != 0 {
+                    calcStack.push( operate() )
+                    calcLabel.text = String( calcStack.peek() )
+                } else {
+                    timeToOperate = timeToOperate + 1
+                    isOperator = true
+                    opStack.push( whichButton )
+                    let nextOp = opToString( opStack.peek () )
+                    calcLabel.text = calcLabel.text! + nextOp
+                    ableOps( false )
+                }
+               
             }
         }
     }
